@@ -47,7 +47,7 @@
 - AI·개발자 확인용: [텍스트 기반 ERD](../diagrams/ERD-텍스트.md)
 - 사람 확인용: [ERD 이미지](../diagrams/ERD이미지.png)
 
-![BuildUp 사람이 읽기 쉬운 ERD](../diagrams/ERD이미지.png)
+![ERD 이미지](../diagrams/ERD이미지.png)
 
 ## Flyway 이력
 
