@@ -1,0 +1,43 @@
+@baseUrl = https://api.example.com
+@accessToken = replace-with-access-token
+@refreshToken = replace-with-refresh-token
+
+### 서버 상태 확인
+GET {{baseUrl}}/api/health
+Accept: application/json
+
+### 로그인
+# 실제 요청 필드와 테스트 계정은 팀 API 명세를 확인합니다.
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "developer@example.com",
+  "password": "replace-with-test-password"
+}
+
+### 현재 사용자 조회
+GET {{baseUrl}}/api/users/me
+Authorization: Bearer {{accessToken}}
+Accept: application/json
+
+### 참여 현장 목록
+GET {{baseUrl}}/api/sites
+Authorization: Bearer {{accessToken}}
+Accept: application/json
+
+### Access Token 갱신
+POST {{baseUrl}}/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+### 로그아웃
+POST {{baseUrl}}/api/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
