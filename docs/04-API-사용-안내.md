@@ -98,4 +98,24 @@ DB 주소, DB 계정, DB 비밀번호, JWT Secret은 프론트엔드에 전달�
 | 404 | 대상 없음 또는 접근 가능한 대상이 아님 | 목록으로 이동 |
 | 409 | 중복 또는 현재 상태와 충돌 | 중복·상태 안내 |
 
-간단한 호출 예시는 [HTTP 예제](../api-examples/buildup-api.http)에 있습니다. 요청·응답 DTO의 상세 명세는 후속 과제로 보완합니다.
+## 오류 응답 규격
+
+```json
+{
+  "timestamp": "2026-10-03T03:00:00Z",
+  "status": 400,
+  "code": "VALIDATION_FAILED",
+  "message": "Request validation failed",
+  "path": "/api/auth/signup",
+  "fieldErrors": {
+    "email": "must be a well-formed email address"
+  }
+}
+```
+
+- 프론트엔드는 변경될 수 있는 `message`가 아니라 안정적인 `code`를 기준으로 동작과 문구를 결정합니다.
+- 입력 검증 오류는 `fieldErrors`의 필드명과 메시지를 화면 입력란에 연결합니다.
+- 토큰이 없으면 `AUTHENTICATION_REQUIRED`, 토큰이 유효하지 않으면 `INVALID_ACCESS_TOKEN`, 권한이 없으면 `ACCESS_DENIED`가 반환됩니다.
+- 처리되지 않은 내부 오류는 `INTERNAL_SERVER_ERROR`로 반환되며 내부 상세 정보는 응답에 노출하지 않습니다.
+
+간단한 호출 예시는 [HTTP 예제](../api-examples/buildup-api.http)에 있습니다. 전체 공통 오류 코드와 도메인 오류 코드는 백엔드 저장소의 `docs/ERRORS.md`를 기준으로 관리합니다.
